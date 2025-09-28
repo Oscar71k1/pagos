@@ -4,7 +4,10 @@
   "description": "Microservicio para gestión de pagos y órdenes",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build step required'",
+    "test": "echo 'No tests specified'"
   },
   "dependencies": {
     "express": "^4.18.2",
