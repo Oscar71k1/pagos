@@ -14,25 +14,20 @@ app.use(express.json());
 // Configuración de Firebase Admin
 let db;
 try {
-  // Configuración de Firebase usando variables de entorno
+  // Configuración de Firebase directamente en el código
   const serviceAccount = {
     type: "service_account",
-    project_id: process.env.FIREBASE_PROJECT_ID,
-    private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-    private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    client_email: process.env.FIREBASE_CLIENT_EMAIL,
-    client_id: process.env.FIREBASE_CLIENT_ID,
+    project_id: "micro-7f26b",
+    private_key_id: "7777c8b7332b5f939c5f2178d1ecb3e852a5fa34",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDnOUPJTFW/q7Xe\nZuMzOch0dMspfnwS2sXX+Cg1I1ROjZM9YgMEIBNh/P+s+d7u2JVKe9PFuJitVZsS\nogAGO6X8jjo+btlanKIgojs+AlOEf8fadeSLw3jJ9gZvUGvQuhvYLGRo1iAT5cwr\ngpzumyHl8AhaL3T4gv1plv/cUPLnbAR4iQztmRL5qpUp2B561z/9jbztHIROZz24\nOESjSD154D/97xQa5lkCXS9Pe9p4hWp6YNftsfPE17L5sizxtZP0ylZGgLGD7iGf\nBHax+0dGZ4Eo0WAAlyGQj+DJ7r+Uw+ZqnnMM2RvJcxgNyW/PX5CC7Z1aceyregta\nU0ToXJ/HAgMBAAECggEAGiFHD027QldXIgSHjXJCEc23EyqHk/aO4CAGTzGoZTOA\n8wa1/OExFORAnTLO+40/RcpmPWm7MJoZgGANV6b6/uZbH6jAPbSwv7ZbB+AUbHH8\n9autVxFmf5BNhtvUQKN04mzrMKEYwUGOsqYRMl0Wq25WS0wh+wmL4MMJ3sMectdz\noYOclqksURthLwBj1GYN3TNqeK6xZd1Hf/SZ4PSVnhTOhqsboDCBAyG/jyMX+NDv\ngEYI8SwI8tlxsMbvAzhRJ+qJCeUYg1AMIAuoe1WyRdVYXgDQ/DKREIWC3/UNTHQd\n0bVZZTrD3/mzVENgoCujvGzdmvKHWHH5MAB2JKjPtQKBgQD56b61l91EMYavaeFV\nQTTcxb6oiaD7gBfBV7ctkAkZFUv03PHtyW3C0wyTd7LNzlbVJJls/52Q5igmTR4p\nne6jfyZnhg9COt9/cja5tcqUzfsTiqMnZuNVJ9lGEcDd1F5yf0H11q0Ril2EmnKT\nMt6xUptiTyU2UOrnr+Jg+Oa+QwKBgQDs2vzxIbho1+a0umhr0Ai6UKJ+zrkWaI9Z\n0IjE/DiqEIkBCD2rB3Gku3nVWNlGO0CEjUpW9grF0v6j8lDtlfiBUoyqZ/M1mp/k\ngmJwdmQzxLqtnydQaPT/bkx/KnTNT7tnGf2P5b/JsrFWEB3oLX3xVt1DxFZUKi3W\nebiahmY6LQKBgFnpCF2Yp1hTYRtWwmTDstsCoZdM/Ie/C8zZW+OegEdv7AXKP5fG\n8iA3gbzEQaXdaEwCgNhAFlX9F9C/yew7D5Huushf6LlxKNtXIe0qRBnJCV18cTpJ\nv9vxHDAjTvn/34Ld2cMyWs2GtCJy1mmy0X+GMrTpuH+UGQ8FrjIpGgq1AoGAUt0K\nQRIbAhMGk5PjlFRjuUscjmCkQEK0ZCegscnLyTOfusy3Rm6EQ62TIiDDYt6346fK\nqkHJ4wu+Kn1L8tLU7emDbNqRK9+8sKUs60uAItxgsv1LM8aEcBiWiqa/1lReq+Nb\n4kvunRH3GLTqwZ+owBYzstGtoiRfhPlwrB75BMECgYEA3cMFn0brG8AZQ3bgGlL4\nqzfh9Bkf+Tf9qu+dB64Q8imMd/FYrsQhPtzCkKvEijf+vIoXz73XmtM6OYvfcFxx\nKEQVFXyLvUU7cr03xf7/H/uzFiV/RT8WlyMOMXvEXTKW3911brGufLTBAlYXItpN\nefyLNAPUM0zN7iO5xms7PMk=\n-----END PRIVATE KEY-----\n",
+    client_email: "firebase-adminsdk-fbsvc@micro-7f26b.iam.gserviceaccount.com",
+    client_id: "112008845739031064206",
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-    client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40micro-7f26b.iam.gserviceaccount.com",
     universe_domain: "googleapis.com"
   };
-
-  // Verificar que todas las variables necesarias estén presentes
-  if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
-    throw new Error('Variables de entorno de Firebase no configuradas');
-  }
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
