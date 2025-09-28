@@ -78,7 +78,7 @@ let pagosEnMemoria = [
 async function validarUsuario(usuarioId) {
   try {
     // Usar URL de producción si está disponible, sino localhost para desarrollo
-    const usuariosUrl = process.env.USUARIOS_URL || 'http://localhost:3001';
+    const usuariosUrl = process.env.USUARIOS_URL || 'https://usuarios-vsao.onrender.com';
     const response = await axios.get(`${usuariosUrl}/api/validar/${usuarioId}`);
     return response.data;
   } catch (error) {
